@@ -25,10 +25,10 @@
             Route="ProfilPage" />
 
         <ShellContent
-            Title="Notifications"
-            Icon="notification_icon.png"
-            ContentTemplate="{DataTemplate views:NotificationsPage}"
-            Route="NotificationsPage" />
+            Title="Ajout"
+            Icon="add_icon.png"
+            ContentTemplate="{DataTemplate views:AjoutPage}"
+            Route="AjoutPage" />
 
         <ShellContent
             Title="Paramètres"
