@@ -3,13 +3,38 @@
     x:Class="BarsboldApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BarsboldApp"
+    xmlns:views="clr-namespace:BarsboldApp.Views"
     Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="White"
+    Shell.TabBarTitleColor="Gray"
+    Shell.TabBarUnselectedColor="Gray"
+    Shell.TabBarForegroundColor="#512BD4"
     Title="BarsboldApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Accueil"
+            Icon="home_icon.png"
+            ContentTemplate="{DataTemplate views:AccueilPage}"
+            Route="AccueilPage" />
+
+        <ShellContent
+            Title="Profil"
+            Icon="profile_icon.png"
+            ContentTemplate="{DataTemplate views:ProfilPage}"
+            Route="ProfilPage" />
+
+        <ShellContent
+            Title="Notifications"
+            Icon="notification_icon.png"
+            ContentTemplate="{DataTemplate views:NotificationsPage}"
+            Route="NotificationsPage" />
+
+        <ShellContent
+            Title="Paramètres"
+            Icon="settings_icon.png"
+            ContentTemplate="{DataTemplate views:ParametresPage}"
+            Route="ParametresPage" />
+    </TabBar>
 
 </Shell>
