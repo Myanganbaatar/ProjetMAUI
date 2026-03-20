@@ -14,25 +14,25 @@
     <TabBar>
         <ShellContent
             Title="Accueil"
-            Icon="home_icon.png"
+            Icon="dotnet_bot.png"
             ContentTemplate="{DataTemplate views:AccueilPage}"
             Route="AccueilPage" />
 
         <ShellContent
             Title="Profil"
-            Icon="profile_icon.png"
+            Icon="dotnet_bot.png"
             ContentTemplate="{DataTemplate views:ProfilPage}"
             Route="ProfilPage" />
 
         <ShellContent
             Title="Ajout"
-            Icon="add_icon.png"
+            Icon="dotnet_bot.png"
             ContentTemplate="{DataTemplate views:AjoutPage}"
             Route="AjoutPage" />
 
         <ShellContent
             Title="Paramètres"
-            Icon="settings_icon.png"
+            Icon="dotnet_bot.png"
             ContentTemplate="{DataTemplate views:ParametresPage}"
             Route="ParametresPage" />
     </TabBar>
