@@ -11,30 +11,34 @@
     Shell.TabBarForegroundColor="#512BD4"
     Title="BarsboldApp">
 
-    <TabBar>
+    <TabBar IsEnabled="True">
         <ShellContent
             Title="Accueil"
-            Icon="home_icone.png"
             ContentTemplate="{DataTemplate views:AccueilPage}"
-            Route="AccueilPage" />
+            Route="AccueilPage"
+            Icon="home_icone.png"
+            IsEnabled="True" />
 
         <ShellContent
             Title="Profil"
-            Icon="profil_icone.png"
             ContentTemplate="{DataTemplate views:ProfilPage}"
-            Route="ProfilPage" />
+            Route="ProfilPage"
+            Icon="profil_icone.png"
+            IsEnabled="True" />
 
         <ShellContent
             Title="Ajout"
-            Icon="ajout_icone.png"
             ContentTemplate="{DataTemplate views:AjoutPage}"
-            Route="AjoutPage" />
+            Route="AjoutPage"
+            Icon="ajout_icone.png"
+            IsEnabled="True" />
 
         <ShellContent
             Title="Paramètres"
-            Icon="settings_icone.png"
             ContentTemplate="{DataTemplate views:ParametresPage}"
-            Route="ParametresPage" />
+            Route="ParametresPage"
+            Icon="settings_icone.png"
+            IsEnabled="True" />
     </TabBar>
 
 </Shell>
