@@ -8,16 +8,24 @@
         Spacing="25"
         VerticalOptions="Center">
 
-        <Label
-            Text="Bienvenue sur Accueil"
-            FontSize="32"
-            FontAttributes="Bold"
+        <Image
+            Source="logos.svg"
+            HeightRequest="150"
+            WidthRequest="150"
             HorizontalOptions="Center" />
 
         <Label
-            Text="Page d'accueil de l'application"
+            Text="{Binding MainTitle}"
+            FontSize="32"
+            FontAttributes="Bold"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center" />
+
+        <Label
+            Text="{Binding SubTitle}"
             FontSize="18"
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center" />
 
     </VerticalStackLayout>
 </ContentPage>

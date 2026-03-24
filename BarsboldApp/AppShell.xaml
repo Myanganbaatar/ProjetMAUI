@@ -6,8 +6,8 @@
     xmlns:views="clr-namespace:BarsboldApp.Views"
     Shell.FlyoutBehavior="Disabled"
     Shell.TabBarBackgroundColor="White"
-    Shell.TabBarTitleColor="Gray"
-    Shell.TabBarUnselectedColor="Gray"
+    Shell.TabBarTitleColor="#A9A9A9"
+    Shell.TabBarUnselectedColor="#BEBEBE"
     Shell.TabBarForegroundColor="#512BD4"
     Title="BarsboldApp">
 
