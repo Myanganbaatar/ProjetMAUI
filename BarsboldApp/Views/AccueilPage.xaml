@@ -47,6 +47,26 @@
                    HorizontalOptions="Center" />
         </Grid>
 
+        <CarouselView x:Name="CarouselCountries"
+                      ItemsSource="{Binding CountryImages}"
+                      HeightRequest="200"
+                      Margin="0,20,0,0"
+                      Loop="True"
+                      HorizontalOptions="Fill">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="10"
+                           Padding="0"
+                           HasShadow="True"
+                           Margin="10,0">
+                        <Image Source="{Binding .}"
+                               Aspect="AspectFill"
+                               HeightRequest="200" />
+                    </Frame>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
         <Button
             x:Name="GifBtn"
             Text="Voir l'animation"
