@@ -9,4 +9,9 @@ public partial class AccueilPage : ContentPage
         InitializeComponent();
         BindingContext = new MainViewModel();
     }
+
+    private async void OnGifButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new GifPage());
+    }
 }

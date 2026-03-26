@@ -27,5 +27,36 @@
             HorizontalOptions="Center"
             HorizontalTextAlignment="Center" />
 
+        <Grid Margin="0,20,0,0"
+              ColumnDefinitions="*, *"
+              HorizontalOptions="Center"
+              WidthRequest="300">
+
+            <Image Grid.Column="0"
+                   Source="airplane.png"
+                   HeightRequest="120"
+                   WidthRequest="120"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center" />
+
+            <Image Grid.Column="1"
+                   Source="location.png"
+                   HeightRequest="120"
+                   WidthRequest="120"
+                   Aspect="AspectFit"
+                   HorizontalOptions="Center" />
+        </Grid>
+
+        <Button
+            x:Name="GifBtn"
+            Text="Voir l'animation"
+            SemanticProperties.Hint="Ouvrir la page avec le gif"
+            Clicked="OnGifButtonClicked"
+            HorizontalOptions="Fill"
+            BackgroundColor="#0078D7"
+            TextColor="White"
+            CornerRadius="10"
+            Margin="0,20,0,0" />
+
     </VerticalStackLayout>
 </ContentPage>
