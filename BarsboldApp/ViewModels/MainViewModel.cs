@@ -15,9 +15,9 @@ namespace BarsboldApp.ViewModels
         {
             CountryImages = new ObservableCollection<string>
             {
-                "dotnet_bot.png",
-                "airplane.png",
-                "location.png"
+                "mongolia.png",
+                "france.png",
+                "portugal.png"
             };
         }
 
