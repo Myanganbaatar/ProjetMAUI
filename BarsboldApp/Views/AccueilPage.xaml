@@ -47,5 +47,16 @@
                    HorizontalOptions="Center" />
         </Grid>
 
+        <Button
+            x:Name="GifBtn"
+            Text="Voir l'animation"
+            SemanticProperties.Hint="Ouvrir la page avec le gif"
+            Clicked="OnGifButtonClicked"
+            HorizontalOptions="Fill"
+            BackgroundColor="#0078D7"
+            TextColor="White"
+            CornerRadius="10"
+            Margin="0,20,0,0" />
+
     </VerticalStackLayout>
 </ContentPage>
