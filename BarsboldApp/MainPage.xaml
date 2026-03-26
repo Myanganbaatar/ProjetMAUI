@@ -24,12 +24,35 @@
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
 
+            <Grid Margin="0,20,0,0"
+                  ColumnDefinitions="*, *"
+                  HorizontalOptions="Center"
+                  WidthRequest="300">
+
+                <Image Grid.Column="0"
+                       Source="airplane.png"
+                       HeightRequest="120"
+                       WidthRequest="120"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center" />
+
+                <Image Grid.Column="1"
+                       Source="location.png"
+                       HeightRequest="120"
+                       WidthRequest="120"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center" />
+            </Grid>
+
             <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+                x:Name="GifBtn"
+                Text="Voir l'animation"
+                SemanticProperties.Hint="Ouvrir la page avec le gif"
+                Clicked="OnGifButtonClicked"
+                HorizontalOptions="Fill"
+                BackgroundColor="#0078D7"
+                TextColor="White"
+                CornerRadius="10" />
         </VerticalStackLayout>
     </ScrollView>
 
