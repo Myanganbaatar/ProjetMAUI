@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -7,6 +8,18 @@ namespace BarsboldApp.ViewModels
     {
         private string mainTitle = "Explorateur de Pays";
         private string subTitle = "Le monde à portée de main";
+
+        public ObservableCollection<string> CountryImages { get; set; }
+
+        public MainViewModel()
+        {
+            CountryImages = new ObservableCollection<string>
+            {
+                "dotnet_bot.png",
+                "airplane.png",
+                "location.png"
+            };
+        }
 
         public string MainTitle
         {
@@ -34,9 +47,9 @@ namespace BarsboldApp.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
