@@ -5,77 +5,72 @@
              Title="Accueil">
     <ScrollView>
         <VerticalStackLayout
-            Padding="20,40,20,20"
-            Spacing="15">
+            Padding="20,10,20,20"
+            Spacing="10"
+            VerticalOptions="Start">
 
-        <Image
-            Source="logos.svg"
-            HeightRequest="150"
-            WidthRequest="150"
-            HorizontalOptions="Center" />
+            <Image
+                Source="logos.svg"
+                HeightRequest="120"
+                WidthRequest="120"
+                HorizontalOptions="Center" />
 
-        <Label
-            Text="{Binding MainTitle}"
-            FontSize="32"
-            FontAttributes="Bold"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center" />
+            <Label
+                Text="{Binding MainTitle}"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
 
-        <Label
-            Text="{Binding SubTitle}"
-            FontSize="18"
-            HorizontalOptions="Center"
-            HorizontalTextAlignment="Center" />
+            <Label
+                Text="{Binding SubTitle}"
+                FontSize="16"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
 
-        <Grid Margin="0,20,0,0"
-              ColumnDefinitions="*, *"
-              HorizontalOptions="Center"
-              WidthRequest="300">
+            <Grid Margin="0,5,0,0"
+                  ColumnDefinitions="*, *"
+                  HorizontalOptions="Center"
+                  WidthRequest="300">
+                <Image Grid.Column="0"
+                       Source="airplane.png"
+                       HeightRequest="100"
+                       WidthRequest="100"
+                       Aspect="AspectFit" />
+                <Image Grid.Column="1"
+                       Source="location.png"
+                       HeightRequest="100"
+                       WidthRequest="100"
+                       Aspect="AspectFit" />
+            </Grid>
 
-            <Image Grid.Column="0"
-                   Source="airplane.png"
-                   HeightRequest="120"
-                   WidthRequest="120"
-                   Aspect="AspectFit"
-                   HorizontalOptions="Center" />
+            <CarouselView x:Name="CarouselCountries"
+                          ItemsSource="{Binding CountryImages}"
+                          HeightRequest="180"
+                          Loop="True"
+                          PeekAreaInsets="0">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeThickness="0"
+                                Margin="5,0"
+                                StrokeShape="RoundRectangle 15">
+                            <Image Source="{Binding .}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="180" />
+                        </Border>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
 
-            <Image Grid.Column="1"
-                   Source="location.png"
-                   HeightRequest="120"
-                   WidthRequest="120"
-                   Aspect="AspectFit"
-                   HorizontalOptions="Center" />
-        </Grid>
-
-        <CarouselView x:Name="CarouselCountries"
-                      ItemsSource="{Binding CountryImages}"
-                      HeightRequest="200"
-                      Margin="0,20,0,0"
-                      Loop="True"
-                      PeekAreaInsets="0" 
-                      HorizontalOptions="FillAndExpand">
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Border StrokeThickness="0"
-                            Margin="10,0"
-                            StrokeShape="RoundRectangle 15">
-                        <Image Source="{Binding .}"
-                               Aspect="AspectFill"
-                               HeightRequest="200" />
-                    </Border>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
-        <Button
-            x:Name="GifBtn"
-            Text="Voir l'animation"
-            SemanticProperties.Hint="Ouvrir la page avec le gif"
-            Clicked="OnGifButtonClicked"
-            HorizontalOptions="Fill"
-            BackgroundColor="#0078D7"
-            TextColor="White"
-            CornerRadius="10"
-            Margin="0,20,0,0" />
+            <Button
+                x:Name="GifBtn"
+                Text="Voir l'animation"
+                Clicked="OnGifButtonClicked"
+                HorizontalOptions="Fill"
+                BackgroundColor="#0078D7"
+                TextColor="White"
+                CornerRadius="10"
+                Margin="0,10,0,0" />
 
         </VerticalStackLayout>
     </ScrollView>
