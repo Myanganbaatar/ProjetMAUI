@@ -11,7 +11,7 @@
             Spacing="20">
             
             <Image x:Name="GifImage"
-                   Source="votre_gif.gif"
+                   Source="mongif.gif"
                    HeightRequest="300"
                    WidthRequest="300"
                    Aspect="AspectFit" />

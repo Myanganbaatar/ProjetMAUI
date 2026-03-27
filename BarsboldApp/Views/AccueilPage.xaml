@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarsboldApp.Views.AccueilPage"
              Title="Accueil">
-    <VerticalStackLayout
-        Padding="30,0"
-        Spacing="25"
-        VerticalOptions="Center">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20,40,20,20"
+            Spacing="15">
 
         <Image
             Source="logos.svg"
@@ -56,10 +56,13 @@
                       HorizontalOptions="FillAndExpand">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding .}"
-                           Aspect="AspectFill"
-                           HorizontalOptions="FillAndExpand"
-                           HeightRequest="200" />
+                    <Border StrokeThickness="0"
+                            Margin="10,0"
+                            StrokeShape="RoundRectangle 15">
+                        <Image Source="{Binding .}"
+                               Aspect="AspectFill"
+                               HeightRequest="200" />
+                    </Border>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
@@ -74,5 +77,6 @@
             CornerRadius="10"
             Margin="0,20,0,0" />
 
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
