@@ -11,5 +11,16 @@
                FontAttributes="Bold" 
                HorizontalOptions="Center" 
                Margin="0,0,0,20" />
+
+        <Frame Padding="15" CornerRadius="10" HasShadow="True">
+            <Grid ColumnDefinitions="*, Auto">
+                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                    <Label Text="Mode Sombre" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="Activer le thème sombre" FontSize="14" TextColor="Gray" />
+                </VerticalStackLayout>
+                
+                <Switch Grid.Column="1" IsToggled="{Binding IsDarkMode}" VerticalOptions="Center" />
+            </Grid>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>
