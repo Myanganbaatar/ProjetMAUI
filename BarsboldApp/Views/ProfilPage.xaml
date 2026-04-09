@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:BarsboldApp.Converters"
              x:Class="BarsboldApp.Views.ProfilPage"
              Title="Profil"
              Shell.NavBarIsVisible="False"
-             BackgroundColor="#F8F9FA">
+             BackgroundColor="{AppThemeBinding Light=#F8F9FA, Dark=#121212}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringToBoolConverter x:Key="StringToBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <Grid RowDefinitions="140, Auto, *">
         
@@ -36,7 +43,7 @@
             <Label Text="Mes Éléments" 
                    FontSize="18" 
                    FontAttributes="Bold" 
-                   TextColor="#333" 
+                   TextColor="{AppThemeBinding Light=#333, Dark=White}" 
                    Margin="25,0,0,0"/>
             
             <CollectionView ItemsSource="{Binding Items}" 
@@ -48,11 +55,15 @@
                 
                 <CollectionView.EmptyView>
                     <Frame Margin="25,0" HeightRequest="140" WidthRequest="300" 
-                           BackgroundColor="White" BorderColor="#EEE" CornerRadius="15" HasShadow="True">
+                           BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                           BorderColor="{AppThemeBinding Light=#EEE, Dark=#333}" 
+                           CornerRadius="15" HasShadow="True">
                         <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
                             <Label Text="📬" FontSize="30" HorizontalOptions="Center"/>
-                            <Label Text="Aucun élément ajouté" FontSize="14" TextColor="#888" HorizontalOptions="Center"/>
-                            <Label Text="Ajoutez-en un dans l'onglet '+'" FontSize="11" TextColor="#AAA" HorizontalOptions="Center"/>
+                            <Label Text="Aucun élément ajouté" FontSize="14" 
+                                   TextColor="{AppThemeBinding Light=#888, Dark=#BBB}" HorizontalOptions="Center"/>
+                            <Label Text="Ajoutez-en un dans l'onglet '+'" FontSize="11" 
+                                   TextColor="{AppThemeBinding Light=#AAA, Dark=#888}" HorizontalOptions="Center"/>
                         </VerticalStackLayout>
                     </Frame>
                 </CollectionView.EmptyView>
@@ -61,12 +72,14 @@
                     <DataTemplate>
                         <Frame Margin="10,5" Padding="0" WidthRequest="180" 
                                CornerRadius="15" HasShadow="True" BorderColor="Transparent" 
-                               BackgroundColor="White">
+                               BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
                             <Grid RowDefinitions="*, Auto">
                                 <Image Grid.Row="0" Source="{Binding ImagePath}" Aspect="AspectFill" HeightRequest="100"/>
                                 <VerticalStackLayout Grid.Row="1" Padding="10" Spacing="2">
-                                    <Label Text="{Binding Titre}" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation"/>
-                                    <Label Text="{Binding DateAjout, StringFormat='{0:dd MMM yyyy}'}" FontSize="10" TextColor="#888"/>
+                                    <Label Text="{Binding Titre}" FontAttributes="Bold" FontSize="14" 
+                                           TextColor="{AppThemeBinding Light=#333, Dark=White}" LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding DateAjout, StringFormat='{0:dd MMM yyyy}'}" FontSize="10" 
+                                           TextColor="{AppThemeBinding Light=#888, Dark=#BBB}"/>
                                 </VerticalStackLayout>
                             </Grid>
                         </Frame>
@@ -75,51 +88,75 @@
             </CollectionView>
         </VerticalStackLayout>
 
-        <!-- SECTION 2 : PAYS (Vertical List) -->
-        <VerticalStackLayout Grid.Row="2" x:Name="PaysSection" Padding="25,10,25,0" Spacing="10">
-            <HorizontalStackLayout Spacing="10">
-                <Label Text="🌎 Explorer les Pays" 
+        <!-- SECTION 2 : PAYS -->
+        <Grid Grid.Row="2" x:Name="PaysSection" Padding="25,10,25,0" RowDefinitions="Auto, Auto, Auto, *">
+            
+            <HorizontalStackLayout Grid.Row="0" Spacing="10" Margin="0,0,0,5">
+                <Label Text="🌎 Explorer le Monde" 
                        FontSize="18" 
                        FontAttributes="Bold" 
-                       TextColor="#333" />
+                       TextColor="{AppThemeBinding Light=#333, Dark=White}" />
                 <ActivityIndicator IsRunning="{Binding IsLoading}" 
                                    IsVisible="{Binding IsLoading}" 
                                    Color="#512BD4" 
                                    HeightRequest="20" WidthRequest="20" />
             </HorizontalStackLayout>
+
+            <!-- FILTRES PAR CONTINENT (Horizontal Chips) -->
+            <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never" Margin="0,5,0,15">
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="Tous" Clicked="OnContinentClicked" CommandParameter="All" Padding="15,0" HeightRequest="35" CornerRadius="17" BackgroundColor="{AppThemeBinding Light=#EEE, Dark=#333}" TextColor="{AppThemeBinding Light=#333, Dark=White}" FontSize="12"/>
+                    <Button Text="Afrique" Clicked="OnContinentClicked" CommandParameter="Africa" Padding="15,0" HeightRequest="35" CornerRadius="17" BackgroundColor="{AppThemeBinding Light=#EEE, Dark=#333}" TextColor="{AppThemeBinding Light=#333, Dark=White}" FontSize="12"/>
+                    <Button Text="Amériques" Clicked="OnContinentClicked" CommandParameter="Americas" Padding="15,0" HeightRequest="35" CornerRadius="17" BackgroundColor="{AppThemeBinding Light=#EEE, Dark=#333}" TextColor="{AppThemeBinding Light=#333, Dark=White}" FontSize="12"/>
+                    <Button Text="Asie" Clicked="OnContinentClicked" CommandParameter="Asia" Padding="15,0" HeightRequest="35" CornerRadius="17" BackgroundColor="{AppThemeBinding Light=#EEE, Dark=#333}" TextColor="{AppThemeBinding Light=#333, Dark=White}" FontSize="12"/>
+                    <Button Text="Europe" Clicked="OnContinentClicked" CommandParameter="Europe" Padding="15,0" HeightRequest="35" CornerRadius="17" BackgroundColor="{AppThemeBinding Light=#EEE, Dark=#333}" TextColor="{AppThemeBinding Light=#333, Dark=White}" FontSize="12"/>
+                    <Button Text="Océanie" Clicked="OnContinentClicked" CommandParameter="Oceania" Padding="15,0" HeightRequest="35" CornerRadius="17" BackgroundColor="{AppThemeBinding Light=#EEE, Dark=#333}" TextColor="{AppThemeBinding Light=#333, Dark=White}" FontSize="12"/>
+                </HorizontalStackLayout>
+            </ScrollView>
             
-            <!-- Message de diagnostic (plus discret) -->
-            <Label Text="{Binding ErrorMessage}" 
+            <!-- Message de diagnostic -->
+            <Label Grid.Row="2" Text="{Binding ErrorMessage}" 
                    TextColor="Red" 
                    FontSize="10" 
                    IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToBoolConverter}}"/>
 
-            <CollectionView ItemsSource="{Binding ListePays}" 
-                            SelectionMode="Single" 
-                            SelectionChanged="SurPaysSelectionne"
-                            Margin="0,0,0,10">
+            <CollectionView Grid.Row="3" 
+                            ItemsSource="{Binding ListePays}" 
+                            SelectionMode="None"
+                            VerticalScrollBarVisibility="Always">
                 <CollectionView.EmptyView>
-                    <Label Text="Chargement des pays..." HorizontalOptions="Center" Margin="0,20" TextColor="#888"/>
+                    <Label Text="Chargement des pays..." HorizontalOptions="Center" Margin="0,20" 
+                           TextColor="{AppThemeBinding Light=#888, Dark=#BBB}"/>
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Margin="0,8" Padding="12" CornerRadius="15" 
-                               BorderColor="Transparent" HasShadow="True" BackgroundColor="White">
+                               BorderColor="Transparent" HasShadow="True" 
+                               BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SurPaysSelectionneTap" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
                             <Grid ColumnDefinitions="60, *, Auto">
-                                <Frame Grid.Column="0" HeightRequest="40" WidthRequest="40" Padding="0" CornerRadius="20" IsClippedToBounds="True" BorderColor="#EEE">
+                                <Frame Grid.Column="0" HeightRequest="40" WidthRequest="40" Padding="0" 
+                                       CornerRadius="20" IsClippedToBounds="True" 
+                                       BorderColor="{AppThemeBinding Light=#EEE, Dark=#333}">
                                     <Image Source="{Binding Media.Flag}" Aspect="AspectFill" />
                                 </Frame>
                                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0">
-                                    <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="#333"/>
-                                    <Label Text="{Binding Capital}" FontSize="12" TextColor="#888" />
+                                    <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" 
+                                           TextColor="{AppThemeBinding Light=#333, Dark=White}"/>
+                                    <Label Text="{Binding Capital}" FontSize="12" 
+                                           TextColor="{AppThemeBinding Light=#888, Dark=#BBB}" />
                                 </VerticalStackLayout>
-                                <Label Grid.Column="2" Text="➔" TextColor="#CCC" VerticalOptions="Center" FontSize="20"/>
+                                <Label Grid.Column="2" Text="➔" 
+                                       TextColor="{AppThemeBinding Light=#CCC, Dark=#666}" 
+                                       VerticalOptions="Center" FontSize="20"/>
                             </Grid>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </VerticalStackLayout>
+        </Grid>
 
     </Grid>
 </ContentPage>

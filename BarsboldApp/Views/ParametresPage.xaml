@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarsboldApp.Views.ParametresPage"
-             Title="Paramètres">
+             Title="Paramètres"
+             BackgroundColor="{AppThemeBinding Light=White, Dark=#121212}">
 
     <VerticalStackLayout Padding="20" Spacing="20">
         
@@ -10,24 +11,33 @@
                FontSize="24" 
                FontAttributes="Bold" 
                HorizontalOptions="Center" 
-               Margin="0,0,0,20" />
+               Margin="0,0,0,20"
+               TextColor="{AppThemeBinding Light=#1A1A1A, Dark=White}" />
 
-        <Frame Padding="15" CornerRadius="10" HasShadow="True">
+        <Frame Padding="15" CornerRadius="10" HasShadow="True" 
+               BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}"
+               BorderColor="Transparent">
             <Grid ColumnDefinitions="*, Auto">
                 <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
-                    <Label Text="Mode Sombre" FontSize="18" FontAttributes="Bold" />
-                    <Label Text="Activer le thème sombre" FontSize="14" TextColor="Gray" />
+                    <Label Text="Mode Sombre" FontSize="18" FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light=#1A1A1A, Dark=White}"/>
+                    <Label Text="Activer le thème sombre" FontSize="14" 
+                           TextColor="{AppThemeBinding Light=Gray, Dark=#999}" />
                 </VerticalStackLayout>
                 
                 <Switch Grid.Column="1" IsToggled="{Binding IsDarkMode}" VerticalOptions="Center" />
             </Grid>
         </Frame>
 
-        <Frame Padding="15" CornerRadius="10" HasShadow="True">
+        <Frame Padding="15" CornerRadius="10" HasShadow="True" 
+               BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}"
+               BorderColor="Transparent">
             <Grid ColumnDefinitions="*, Auto">
                 <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
-                    <Label Text="Notifications" FontSize="18" FontAttributes="Bold" />
-                    <Label Text="Recevoir des alertes" FontSize="14" TextColor="Gray" />
+                    <Label Text="Notifications" FontSize="18" FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light=#1A1A1A, Dark=White}"/>
+                    <Label Text="Recevoir des alertes" FontSize="14" 
+                           TextColor="{AppThemeBinding Light=Gray, Dark=#999}" />
                 </VerticalStackLayout>
                 
                 <Switch Grid.Column="1" IsToggled="{Binding IsNotificationsEnabled}" VerticalOptions="Center" />

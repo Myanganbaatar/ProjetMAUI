@@ -21,8 +21,8 @@ public class ApiService
     {
         try
         {
-            // On filtre par région (Europe) pour que le fichier soit beaucoup plus léger à télécharger
-            var url = "https://restcountries.com/v3.1/region/europe?fields=name,capital,population,flags";
+            // On récupère TOUS les pays avec les champs nécessaires, y compris la région pour le filtrage
+            var url = "https://restcountries.com/v3.1/all?fields=name,capital,population,flags,region";
             var response = await _httpClient.GetAsync(url);
             
             if (response.IsSuccessStatusCode)
@@ -37,6 +37,7 @@ public class ApiService
                         Name = rc.Name?.Common ?? "Inconnu",
                         Capital = rc.Capital != null && rc.Capital.Length > 0 ? rc.Capital[0] : "N/A",
                         Population = rc.Population,
+                        Region = rc.Region ?? "Other",
                         Media = new CountryMedia { Flag = rc.Flags?.Png }
                     }).OrderBy(c => c.Name).ToList();
                 }
@@ -55,9 +56,9 @@ public class ApiService
     {
         return new List<Country>
         {
-            new Country { Name = "France (Test)", Capital = "Paris", Population = 67000000, Media = new CountryMedia { Flag = "https://flagcdn.com/w320/fr.png" } },
-            new Country { Name = "Mongolie (Test)", Capital = "Oulan-Bator", Population = 3300000, Media = new CountryMedia { Flag = "https://flagcdn.com/w320/mn.png" } },
-            new Country { Name = "Japon (Test)", Capital = "Tokyo", Population = 125000000, Media = new CountryMedia { Flag = "https://flagcdn.com/w320/jp.png" } }
+            new Country { Name = "France (Test)", Capital = "Paris", Population = 67000000, Region = "Europe", Media = new CountryMedia { Flag = "https://flagcdn.com/w320/fr.png" } },
+            new Country { Name = "Mongolie (Test)", Capital = "Oulan-Bator", Population = 3300000, Region = "Asia", Media = new CountryMedia { Flag = "https://flagcdn.com/w320/mn.png" } },
+            new Country { Name = "Japon (Test)", Capital = "Tokyo", Population = 125000000, Region = "Asia", Media = new CountryMedia { Flag = "https://flagcdn.com/w320/jp.png" } }
         };
     }
 }
@@ -73,6 +74,9 @@ internal class RestCountryDto
 
     [JsonPropertyName("population")]
     public long Population { get; set; }
+
+    [JsonPropertyName("region")]
+    public string Region { get; set; }
 
     [JsonPropertyName("flags")]
     public RestFlags Flags { get; set; }

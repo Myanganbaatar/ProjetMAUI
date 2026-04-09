@@ -10,6 +10,9 @@ public class PaysViewModel : INotifyPropertyChanged
 {
     private readonly ApiService _apiService;
     private bool _isLoading;
+    private string _errorMessage;
+    private List<Country> _tousLesPays = new();
+    private string _filtreActif = "All";
     
     public ObservableCollection<Country> ListePays { get; set; } = new();
 
@@ -19,6 +22,26 @@ public class PaysViewModel : INotifyPropertyChanged
         set
         {
             _isLoading = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string ErrorMessage
+    {
+        get => _errorMessage;
+        set
+        {
+            _errorMessage = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string FiltreActif
+    {
+        get => _filtreActif;
+        set
+        {
+            _filtreActif = value;
             OnPropertyChanged();
         }
     }
@@ -33,23 +56,39 @@ public class PaysViewModel : INotifyPropertyChanged
         if (IsLoading) return;
         
         IsLoading = true;
+        ErrorMessage = string.Empty;
+
         try
         {
             var paysTelecharges = await _apiService.GetCountriesAsync();
             
-            ListePays.Clear();
-            foreach (var pays in paysTelecharges)
-            {
-                ListePays.Add(pays);
-            }
+            _tousLesPays = paysTelecharges;
+            
+            FiltrerParContinent(_filtreActif);
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Erreur : {ex.Message}");
+            ErrorMessage = $"Erreur : {ex.Message}";
+            System.Diagnostics.Debug.WriteLine(ErrorMessage);
         }
         finally
         {
             IsLoading = false;
+        }
+    }
+
+    public void FiltrerParContinent(string continent)
+    {
+        FiltreActif = continent;
+        
+        var paysFiltres = continent == "All" 
+            ? _tousLesPays 
+            : _tousLesPays.Where(p => p.Region.Equals(continent, StringComparison.OrdinalIgnoreCase)).ToList();
+
+        ListePays.Clear();
+        foreach (var pays in paysFiltres)
+        {
+            ListePays.Add(pays);
         }
     }
 

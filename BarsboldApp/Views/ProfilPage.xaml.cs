@@ -1,43 +1,66 @@
 using BarsboldApp.Models;
 using BarsboldApp.ViewModels;
+using Microsoft.Maui.ApplicationModel;
 
 namespace BarsboldApp.Views;
 
 public partial class ProfilPage : ContentPage
 {
     private readonly PaysViewModel _viewModel;
+    private bool _isNavigating = false;
 
     public ProfilPage(PaysViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;
         
-        // On assigne les BindingContexts aux sections correspondantes
         ItemsSection.BindingContext = new ProfilViewModel();
         PaysSection.BindingContext = _viewModel;
     }
     
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
         base.OnAppearing();
         
-        // On recharge les pays si la liste est vide pour toujours avoir du contenu
+        // Réinitialisation de l'état de navigation pour permettre de recliquer
+        _isNavigating = false;
+        
         if (_viewModel.ListePays.Count == 0)
         {
-            await _viewModel.ChargerPaysAsync();
+            Task.Run(async () => await _viewModel.ChargerPaysAsync());
         }
     }
 
-    
-    private async void SurPaysSelectionne(object sender, SelectionChangedEventArgs e)
+    private async void SurPaysSelectionneTap(object sender, TappedEventArgs e)
     {
-        if (e.CurrentSelection.FirstOrDefault() is Country paysClique)
-        {
-            // On désélectionne l'élément visuellement
-            ((CollectionView)sender).SelectedItem = null;
+        // On évite les doubles clics
+        if (_isNavigating) return;
 
-            // On navigue vers la page de détail
-            await Navigation.PushAsync(new PaysDetailPage(paysClique));
+        if (e.Parameter is Country paysClique)
+        {
+            _isNavigating = true;
+
+            // Navigation immédiate sur le thread UI
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                try 
+                {
+                    await Navigation.PushAsync(new PaysDetailPage(paysClique));
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Erreur Navigation : {ex.Message}");
+                    _isNavigating = false;
+                }
+            });
+        }
+    }
+
+    private void OnContinentClicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is string continent)
+        {
+            _viewModel.FiltrerParContinent(continent);
         }
     }
 }
