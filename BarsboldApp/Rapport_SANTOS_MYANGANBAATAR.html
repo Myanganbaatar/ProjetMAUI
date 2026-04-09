@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport de Projet MAUI - SANTOS & MYANGANBAATAR</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #512BD4;
+            border-bottom: 2px solid #512BD4;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 30px;
+            border-left: 5px solid #512BD4;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+        }
+        .student-info {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+        .feature-item {
+            margin-bottom: 15px;
+        }
+        .feature-title {
+            font-weight: bold;
+            color: #512BD4;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: #eee;
+            margin: 30px 0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.9em;
+            color: #999;
+            margin-top: 50px;
+        }
+        @media print {
+            body { background-color: white; margin: 0; padding: 0; }
+            .container { box-shadow: none; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rapport de Projet MAUI</h1>
+        <div class="student-info">
+            Présenté par : SANTOS & MYANGANBAATAR
+        </div>
+
+        <h2>1. Présentation du Projet</h2>
+        <p>Ce projet consiste en la création d'une application mobile multiplateforme utilisant le framework <strong>.NET MAUI</strong>. L'application, nommée <em>BarsboldApp</em>, offre une interface riche et moderne pour la gestion d'une collection personnelle d'éléments et l'exploration de données géographiques mondiales.</p>
+
+        <h2>2. Architecture Technique</h2>
+        <ul>
+            <strong>Modèle MVVM</strong> : Séparation stricte de la logique métier (ViewModels) et de l'interface (Views).<br>
+            <strong>Services Data</strong> : Consommation asynchrone d'API REST avec gestion de cache et fallback.<br>
+            <strong>Interface</strong> : Utilisation avancée du XAML avec styles adaptatifs.<br>
+        </ul>
+
+        <h2>3. Fonctionnalités de Base Complétées</h2>
+        <ul>
+            <strong>Accueil</strong> : Page de lancement avec carousel d'images dynamique.<br>
+            <strong>Gestion d'Éléments</strong> : Formulaire d'ajout sécurisé avec intégration des services de média (photo).<br>
+            <strong>Navigation</strong> : Système de Tabs et navigation hiérarchique (PushAsync) vers le détail des pays.<br>
+        </ul>
+
+        
+
+        <h2>4. Fonctionnalités Supplémentaires (Page 4)</h2>
+        <p>Pour répondre aux exigences d'optimisation et d'UX "Premium", nous avons implémenté les éléments suivants :</p>
+
+        <div class="feature-item">
+            <span class="feature-title">Intégration Mondiale Exhaustive</span><br>
+            Contrairement à un affichage limité, l'application interroge l'API mondiale complète (RestCountries V3.1) permettant d'explorer plus de 250 pays avec leurs drapeaux, capitales et populations.
+        </div>
+
+        <div class="feature-item">
+            <span class="feature-title"> Système de Filtrage Dynamique (Continent Chips)</span><br>
+            Ajout d'une interface de filtrage par segments (Afrique, Amériques, Asie, Europe, Océanie). Le filtrage est réalisé en mémoire (Linq) pour un basculement instantané sans recharger les données web.
+        </div>
+
+        <div class="feature-item">
+            <span class="feature-title"> Mode Sombre Natif & Adaptatif</span><br>
+            Implémentation complète du <code>AppThemeBinding</code> sur toutes les pages. L'application change d'apparence en temps réel (fonds, textes, cartes) pour correspondre au mode sombre du système.
+        </div>
+
+        <div class="feature-item">
+            <span class="feature-title"> Navigation & UX Optimisée</span><br>
+            Remplacement du système de sélection standard par des <code>TapGestureRecognizers</code> sur les cartes, éliminant la latence de sélection d'Android et rendant l'application beaucoup plus réactive.
+        </div>
+
+        <div class="feature-item">
+            <span class="feature-title"> Résilience et Diagnostics</span><br>
+            Ajout d'un système de gestion de pannes réseau affichant des messages clairs et permettant l'affichage de données locales en cas d'indisponibilité de l'API.
+        </div>
+
+        <div class="footer">
+            Projet MAUI - 2026 - SANTOS & MYANGANBAATAR
+        </div>
+    </div>
+</body>
+</html>

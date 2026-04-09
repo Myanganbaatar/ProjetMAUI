@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using BarsboldApp.Services;   
 using BarsboldApp.ViewModels;
 using BarsboldApp.Views;
+using Plugin.LocalNotification;
 
 namespace BarsboldApp;
 
@@ -12,6 +13,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .UseLocalNotification()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

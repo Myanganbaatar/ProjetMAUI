@@ -1,8 +1,11 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using BarsboldApp.Models;
+using Microsoft.Maui.Storage;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.AndroidOption;
 
 namespace BarsboldApp.ViewModels
 {
@@ -169,6 +172,23 @@ namespace BarsboldApp.ViewModels
             };
 
             ItemsList.Add(nouvelItem);
+
+            // Notification si activée
+            if (Microsoft.Maui.Storage.Preferences.Default.Get("NotifsActivees", true))
+            {
+                var notification = new NotificationRequest
+                {
+                    NotificationId = 2000,
+                    Title = "📖 Nouvel élément !",
+                    Description = $"L'élément '{Titre}' a été ajouté à votre collection.",
+                    BadgeNumber = 1,
+                    Android = new AndroidOptions
+                    {
+                        IconSmallName = new AndroidIcon("logos")
+                    }
+                };
+                LocalNotificationCenter.Current.Show(notification);
+            }
 
             await Application.Current?.MainPage?.DisplayAlert("Succès", "L'élément a été ajouté avec succès", "OK");
 

@@ -2,6 +2,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Storage;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.AndroidOption;
 
 namespace BarsboldApp.ViewModels;
 
@@ -20,10 +22,7 @@ public class ParametresViewModel : INotifyPropertyChanged
                 _isDarkMode = value;
                 OnPropertyChanged();
                 
-                
                 Application.Current.UserAppTheme = value ? AppTheme.Dark : AppTheme.Light;
-                
-              
                 Preferences.Default.Set("DarkModeChoisi", value);
             }
         }
@@ -39,8 +38,24 @@ public class ParametresViewModel : INotifyPropertyChanged
                 _isNotificationsEnabled = value;
                 OnPropertyChanged();
                 
-               
                 Preferences.Default.Set("NotifsActivees", value);
+
+                if (value)
+                {
+                    var notification = new NotificationRequest
+                    {
+                        NotificationId = 1000,
+                        Title = "🔔 Succès !",
+                        Description = "Les notifications sont maintenant activées.",
+                        BadgeNumber = 1,
+                        Schedule = { NotifyTime = DateTime.Now.AddSeconds(1) },
+                        Android = new AndroidOptions
+                        {
+                            IconSmallName = new AndroidIcon("logos")
+                        }
+                    };
+                    LocalNotificationCenter.Current.Show(notification);
+                }
             }
         }
     }
