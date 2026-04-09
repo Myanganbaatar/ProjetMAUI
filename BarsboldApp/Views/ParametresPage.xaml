@@ -22,5 +22,17 @@
                 <Switch Grid.Column="1" IsToggled="{Binding IsDarkMode}" VerticalOptions="Center" />
             </Grid>
         </Frame>
+
+        <Frame Padding="15" CornerRadius="10" HasShadow="True">
+            <Grid ColumnDefinitions="*, Auto">
+                <VerticalStackLayout Grid.Column="0" VerticalOptions="Center">
+                    <Label Text="Notifications" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="Recevoir des alertes" FontSize="14" TextColor="Gray" />
+                </VerticalStackLayout>
+                
+                <Switch Grid.Column="1" IsToggled="{Binding IsNotificationsEnabled}" VerticalOptions="Center" />
+            </Grid>
+        </Frame>
+
     </VerticalStackLayout>
 </ContentPage>
