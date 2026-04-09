@@ -10,6 +10,7 @@ public class ApiService
     public ApiService()
     {
         _httpClient = new HttpClient();
+        _httpClient.Timeout = TimeSpan.FromSeconds(10);
     }
 
     
@@ -22,8 +23,7 @@ public class ApiService
             
             if (response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadFromJsonAsync<CountryResponse>();
-                return content?.List ?? new List<Country>();
+                return await response.Content.ReadFromJsonAsync<List<Country>>() ?? new List<Country>();
             }
         }
         catch (Exception ex)
