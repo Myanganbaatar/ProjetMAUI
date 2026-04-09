@@ -1,12 +1,15 @@
+using BarsboldApp.Models;
 using BarsboldApp.ViewModels;
 
 namespace BarsboldApp.Views;
 
 public partial class ProfilPage : ContentPage
 {
-    public ProfilPage()
+    private readonly PaysViewModel _viewModel;
+
+    public ProfilPage(PaysViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = new ProfilViewModel();
+        _viewModel = viewModel;
     }
 }
