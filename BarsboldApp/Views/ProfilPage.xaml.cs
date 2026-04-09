@@ -12,6 +12,7 @@ public partial class ProfilPage : ContentPage
         InitializeComponent();
         _viewModel = viewModel;
         
+        // On assigne les BindingContexts aux sections correspondantes
         ItemsSection.BindingContext = new ProfilViewModel();
         PaysSection.BindingContext = _viewModel;
     }
@@ -20,7 +21,7 @@ public partial class ProfilPage : ContentPage
     {
         base.OnAppearing();
         
-        
+        // On recharge les pays si la liste est vide pour toujours avoir du contenu
         if (_viewModel.ListePays.Count == 0)
         {
             await _viewModel.ChargerPaysAsync();
@@ -32,10 +33,10 @@ public partial class ProfilPage : ContentPage
     {
         if (e.CurrentSelection.FirstOrDefault() is Country paysClique)
         {
-            
+            // On désélectionne l'élément visuellement
             ((CollectionView)sender).SelectedItem = null;
 
-           
+            // On navigue vers la page de détail
             await Navigation.PushAsync(new PaysDetailPage(paysClique));
         }
     }
