@@ -16,3 +16,8 @@ public class CountryMedia
 {
     public string Flag { get; set; } 
 }
+
+public class CountryResponse
+{
+    public List<Country> List { get; set; }
+}
