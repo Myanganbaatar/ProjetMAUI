@@ -3,84 +3,123 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarsboldApp.Views.ProfilPage"
              Title="Profil"
-             BackgroundColor="White">
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F8F9FA">
     
-    <ScrollView>
-        <VerticalStackLayout Spacing="10">
-            
-            <!-- SECTION : MES ÉLÉMENTS (Collègue) -->
-            <VerticalStackLayout x:Name="ItemsSection" BackgroundColor="White">
-                <VerticalStackLayout Padding="20,20,20,10" Spacing="5">
-                    <Label Text="Mes Éléments" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#333"/>
-                    <Label Text="Liste des éléments ajoutés" FontSize="12" HorizontalOptions="Center" TextColor="#888"/>
+    <Grid RowDefinitions="140, Auto, *">
+        
+        <!-- HEADER PREMIUM -->
+        <Grid Grid.Row="0" BackgroundColor="#512BD4" Padding="25,40,25,0">
+            <HorizontalStackLayout Spacing="20" VerticalOptions="Center">
+                <Frame HeightRequest="70" WidthRequest="70" 
+                       CornerRadius="35" 
+                       Padding="0" 
+                       IsClippedToBounds="True" 
+                       BorderColor="White"
+                       BackgroundColor="#BEBEBE">
+                    <Image Source="profil_icone.png" Aspect="AspectFit" Margin="10"/>
+                </Frame>
+                <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                    <Label Text="Mon Profil" 
+                           TextColor="White" 
+                           FontSize="26" 
+                           FontAttributes="Bold" />
+                    <Label Text="Gérez vos éléments et découvrez le monde" 
+                           TextColor="#CBCBCB" 
+                           FontSize="12" />
                 </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </Grid>
 
-                <VerticalStackLayout Padding="10">
-                    <VerticalStackLayout IsVisible="{Binding IsListEmpty}" Padding="20" Spacing="10" HorizontalOptions="Center">
-                        <Label Text="📋" FontSize="40" HorizontalOptions="Center" />
-                        <Label Text="Aucun élément ajouté" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center" />
-                    </VerticalStackLayout>
-
-                    <!-- BindableLayout is safer for scrolling inside a ScrollView if list is not huge -->
-                    <!-- But let's use CollectionView with a fixed Height if we must. -->
-                    <!-- Using CollectionView with HeightRequest for stability -->
-                    <CollectionView ItemsSource="{Binding Items}" 
-                                    SelectionMode="None"
-                                    HeightRequest="300" 
-                                    IsVisible="{Binding IsNotEmpty}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Margin="5" Padding="5" CornerRadius="10">
-                                    <Label Text="{Binding Titre}" FontAttributes="Bold"/>
-                                </Frame>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </VerticalStackLayout>
-            </VerticalStackLayout>
+        <!-- SECTION 1 : MES ÉLÉMENTS (Horizontal Carousel) -->
+        <VerticalStackLayout Grid.Row="1" x:Name="ItemsSection" Padding="0,20,0,10" Spacing="10">
+            <Label Text="Mes Éléments" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   TextColor="#333" 
+                   Margin="25,0,0,0"/>
             
-            <BoxView HeightRequest="2" Color="#EEE" Margin="10,5" />
+            <CollectionView ItemsSource="{Binding Items}" 
+                            HeightRequest="160"
+                            SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="15" />
+                </CollectionView.ItemsLayout>
+                
+                <CollectionView.EmptyView>
+                    <Frame Margin="25,0" HeightRequest="140" WidthRequest="300" 
+                           BackgroundColor="White" BorderColor="#EEE" CornerRadius="15" HasShadow="True">
+                        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="5">
+                            <Label Text="📬" FontSize="30" HorizontalOptions="Center"/>
+                            <Label Text="Aucun élément ajouté" FontSize="14" TextColor="#888" HorizontalOptions="Center"/>
+                            <Label Text="Ajoutez-en un dans l'onglet '+'" FontSize="11" TextColor="#AAA" HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </CollectionView.EmptyView>
 
-            <!-- SECTION : PAYS (Vos ajouts) -->
-            <VerticalStackLayout x:Name="PaysSection" Padding="10">
-                <Label Text="🌎 Liste des Pays" 
-                       FontSize="22" 
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="10,5" Padding="0" WidthRequest="180" 
+                               CornerRadius="15" HasShadow="True" BorderColor="Transparent" 
+                               BackgroundColor="White">
+                            <Grid RowDefinitions="*, Auto">
+                                <Image Grid.Row="0" Source="{Binding ImagePath}" Aspect="AspectFill" HeightRequest="100"/>
+                                <VerticalStackLayout Grid.Row="1" Padding="10" Spacing="2">
+                                    <Label Text="{Binding Titre}" FontAttributes="Bold" FontSize="14" LineBreakMode="TailTruncation"/>
+                                    <Label Text="{Binding DateAjout, StringFormat='{0:dd MMM yyyy}'}" FontSize="10" TextColor="#888"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+
+        <!-- SECTION 2 : PAYS (Vertical List) -->
+        <VerticalStackLayout Grid.Row="2" x:Name="PaysSection" Padding="25,10,25,0" Spacing="10">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="🌎 Explorer les Pays" 
+                       FontSize="18" 
                        FontAttributes="Bold" 
-                       HorizontalOptions="Center" 
-                       Margin="0,0,0,10"
-                       TextColor="#512BD4"/>
-
-                <!-- Indicateur de chargement -->
+                       TextColor="#333" />
                 <ActivityIndicator IsRunning="{Binding IsLoading}" 
                                    IsVisible="{Binding IsLoading}" 
                                    Color="#512BD4" 
-                                   HorizontalOptions="Center" />
+                                   HeightRequest="20" WidthRequest="20" />
+            </HorizontalStackLayout>
+            
+            <!-- Message de diagnostic (plus discret) -->
+            <Label Text="{Binding ErrorMessage}" 
+                   TextColor="Red" 
+                   FontSize="10" 
+                   IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToBoolConverter}}"/>
 
-                <!-- CollectionView avec hauteur forcée pour éviter le bug de collapse -->
-                <CollectionView ItemsSource="{Binding ListePays}" 
-                                SelectionMode="Single" 
-                                SelectionChanged="SurPaysSelectionne" 
-                                HeightRequest="600"
-                                Margin="0,5">
-                    <CollectionView.EmptyView>
-                        <Label Text="Aucun pays trouvé ou chargement en cours..." 
-                               HorizontalOptions="Center" 
-                               Margin="20" 
-                               TextColor="Gray"/>
-                    </CollectionView.EmptyView>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Frame Margin="0,5" Padding="15" CornerRadius="12" BorderColor="#EEE">
-                                <StackLayout Orientation="Horizontal" Spacing="15">
-                                    <Image Source="{Binding Media.Flag}" WidthRequest="50" HeightRequest="30" Aspect="AspectFill" />
-                                    <Label Text="{Binding Name}" FontSize="16" VerticalOptions="Center" FontAttributes="Bold"/>
-                                </StackLayout>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
-
+            <CollectionView ItemsSource="{Binding ListePays}" 
+                            SelectionMode="Single" 
+                            SelectionChanged="SurPaysSelectionne"
+                            Margin="0,0,0,10">
+                <CollectionView.EmptyView>
+                    <Label Text="Chargement des pays..." HorizontalOptions="Center" Margin="0,20" TextColor="#888"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,8" Padding="12" CornerRadius="15" 
+                               BorderColor="Transparent" HasShadow="True" BackgroundColor="White">
+                            <Grid ColumnDefinitions="60, *, Auto">
+                                <Frame Grid.Column="0" HeightRequest="40" WidthRequest="40" Padding="0" CornerRadius="20" IsClippedToBounds="True" BorderColor="#EEE">
+                                    <Image Source="{Binding Media.Flag}" Aspect="AspectFill" />
+                                </Frame>
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Margin="10,0">
+                                    <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="#333"/>
+                                    <Label Text="{Binding Capital}" FontSize="12" TextColor="#888" />
+                                </VerticalStackLayout>
+                                <Label Grid.Column="2" Text="➔" TextColor="#CCC" VerticalOptions="Center" FontSize="20"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
-    </ScrollView>
+
+    </Grid>
 </ContentPage>
