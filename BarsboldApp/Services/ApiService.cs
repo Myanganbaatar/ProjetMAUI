@@ -11,4 +11,27 @@ public class ApiService
     {
         _httpClient = new HttpClient();
     }
+
+    
+    public async Task<List<Country>> GetCountriesAsync()
+    {
+        try
+        {
+
+            var response = await _httpClient.GetAsync("https://api.sampleapis.com/countries/countries");
+            
+            if (response.IsSuccessStatusCode)
+            {
+                
+                return await response.Content.ReadFromJsonAsync<List<Country>>();
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Erreur lors de l'appel API : {ex.Message}");
+        }
+        
+        
+        return new List<Country>();
+    }
 }
