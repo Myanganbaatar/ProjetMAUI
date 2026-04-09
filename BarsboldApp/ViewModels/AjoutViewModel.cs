@@ -11,6 +11,9 @@ namespace BarsboldApp.ViewModels
         private string titre = string.Empty;
         private string description = string.Empty;
         private string imagePath = string.Empty;
+        private string titreError = string.Empty;
+        private string descriptionError = string.Empty;
+        private string imageError = string.Empty;
 
         public static ObservableCollection<ItemModel> ItemsList { get; set; } = new ObservableCollection<ItemModel>();
 
@@ -23,6 +26,7 @@ namespace BarsboldApp.ViewModels
                 {
                     titre = value;
                     OnPropertyChanged();
+                    ValidateTitre();
                 }
             }
         }
@@ -36,6 +40,7 @@ namespace BarsboldApp.ViewModels
                 {
                     description = value;
                     OnPropertyChanged();
+                    ValidateDescription();
                 }
             }
         }
@@ -49,6 +54,46 @@ namespace BarsboldApp.ViewModels
                 {
                     imagePath = value;
                     OnPropertyChanged();
+                    ValidateImage();
+                }
+            }
+        }
+
+        public string TitreError
+        {
+            get => titreError;
+            set
+            {
+                if (titreError != value)
+                {
+                    titreError = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string DescriptionError
+        {
+            get => descriptionError;
+            set
+            {
+                if (descriptionError != value)
+                {
+                    descriptionError = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string ImageError
+        {
+            get => imageError;
+            set
+            {
+                if (imageError != value)
+                {
+                    imageError = value;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -60,6 +105,32 @@ namespace BarsboldApp.ViewModels
         {
             AjouterCommand = new Command(async () => await AjouterItem());
             ChoisirImageCommand = new Command(async () => await ChoisirImage());
+        }
+
+        private void ValidateTitre()
+        {
+            TitreError = string.IsNullOrWhiteSpace(Titre) ? "Le titre est obligatoire" : string.Empty;
+        }
+
+        private void ValidateDescription()
+        {
+            DescriptionError = string.IsNullOrWhiteSpace(Description) ? "La description est obligatoire" : string.Empty;
+        }
+
+        private void ValidateImage()
+        {
+            ImageError = string.IsNullOrWhiteSpace(ImagePath) ? "Veuillez sélectionner une image" : string.Empty;
+        }
+
+        private bool ValidateForm()
+        {
+            ValidateTitre();
+            ValidateDescription();
+            ValidateImage();
+
+            return string.IsNullOrEmpty(TitreError) && 
+                   string.IsNullOrEmpty(DescriptionError) && 
+                   string.IsNullOrEmpty(ImageError);
         }
 
         private async Task ChoisirImage()
@@ -78,27 +149,14 @@ namespace BarsboldApp.ViewModels
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Erreur", $"Impossible de sélectionner l'image: {ex.Message}", "OK");
+                await Application.Current?.MainPage?.DisplayAlert("Erreur", $"Impossible de sélectionner l'image: {ex.Message}", "OK");
             }
         }
 
         private async Task AjouterItem()
         {
-            if (string.IsNullOrWhiteSpace(Titre))
+            if (!ValidateForm())
             {
-                await Application.Current.MainPage.DisplayAlert("Erreur", "Veuillez saisir un titre", "OK");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(Description))
-            {
-                await Application.Current.MainPage.DisplayAlert("Erreur", "Veuillez saisir une description", "OK");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(ImagePath))
-            {
-                await Application.Current.MainPage.DisplayAlert("Erreur", "Veuillez choisir une image", "OK");
                 return;
             }
 
@@ -112,12 +170,15 @@ namespace BarsboldApp.ViewModels
 
             ItemsList.Add(nouvelItem);
 
-            await Application.Current.MainPage.DisplayAlert("Succès", "L'élément a été ajouté avec succès", "OK");
+            await Application.Current?.MainPage?.DisplayAlert("Succès", "L'élément a été ajouté avec succès", "OK");
 
             // Réinitialiser les champs
             Titre = string.Empty;
             Description = string.Empty;
             ImagePath = string.Empty;
+            TitreError = string.Empty;
+            DescriptionError = string.Empty;
+            ImageError = string.Empty;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
