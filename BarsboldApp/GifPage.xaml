@@ -9,12 +9,12 @@
             VerticalOptions="Center"
             HorizontalOptions="Center"
             Spacing="20">
-            
-            <Image x:Name="GifImage"
-                   Source="mongif.gif"
-                   HeightRequest="300"
-                   WidthRequest="300"
-                   Aspect="AspectFit" />
+
+            <WebView x:Name="GifWebView"
+                     HeightRequest="300"
+                     WidthRequest="300"
+                     HorizontalOptions="Fill"
+                     VerticalOptions="Center" />
 
             <Button x:Name="BackButton"
                     Text="Retour à l'accueil"
