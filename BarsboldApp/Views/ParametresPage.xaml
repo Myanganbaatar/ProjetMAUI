@@ -2,22 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarsboldApp.Views.ParametresPage"
-             Title="Settings">
-    <VerticalStackLayout
-        Padding="30,0"
-        Spacing="25"
-        VerticalOptions="Center">
+             Title="Paramètres">
 
-        <Label
-            Text="Paramètres"
-            FontSize="32"
-            FontAttributes="Bold"
-            HorizontalOptions="Center" />
-
-        <Label
-            Text="Configuration de l'application"
-            FontSize="18"
-            HorizontalOptions="Center" />
-
+    <VerticalStackLayout Padding="20" Spacing="20">
+        
+        <Label Text="Réglages de l'application" 
+               FontSize="24" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" 
+               Margin="0,0,0,20" />
     </VerticalStackLayout>
 </ContentPage>
