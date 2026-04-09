@@ -22,8 +22,8 @@ public class ApiService
             
             if (response.IsSuccessStatusCode)
             {
-                
-                return await response.Content.ReadFromJsonAsync<List<Country>>();
+                var content = await response.Content.ReadFromJsonAsync<CountryResponse>();
+                return content?.List ?? new List<Country>();
             }
         }
         catch (Exception ex)
