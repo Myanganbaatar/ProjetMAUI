@@ -16,4 +16,18 @@ public class PaysViewModel
     {
         _apiService = apiService;
     }
+
+    
+    public async Task ChargerPaysAsync()
+    {
+        
+        var paysTelecharges = await _apiService.GetCountriesAsync();
+        
+        
+        ListePays.Clear();
+        foreach (var pays in paysTelecharges)
+        {
+            ListePays.Add(pays);
+        }
+    }
 }
