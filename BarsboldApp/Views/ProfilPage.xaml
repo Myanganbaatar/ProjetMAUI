@@ -39,6 +39,27 @@
                     </CollectionView>
                 </StackLayout>
             </VerticalStackLayout>
+            
+            <!-- Ligne de séparation -->
+            <BoxView HeightRequest="1" Color="#E0E0E0" Margin="20,10" />
+
+            <!-- SECTION : PAYS (Vos ajouts) -->
+            <Grid RowDefinitions="Auto, *" x:Name="PaysSection" MinimumHeightRequest="300" Padding="0,10,0,20">
+                <Label Grid.Row="0" Text="Liste des Pays" FontSize="24" FontAttributes="Bold" Margin="15" HorizontalOptions="Center"/>
+
+                <CollectionView Grid.Row="1" ItemsSource="{Binding ListePays}" SelectionMode="Single" SelectionChanged="SurPaysSelectionne" Margin="10">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Margin="5" Padding="10" CornerRadius="10" HasShadow="True">
+                                <StackLayout Orientation="Horizontal" Spacing="15">
+                                    <Image Source="{Binding Media.Flag}" WidthRequest="60" HeightRequest="40" Aspect="AspectFill" />
+                                    <Label Text="{Binding Name}" FontSize="18" VerticalOptions="Center" FontAttributes="Bold"/>
+                                </StackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
 
         </VerticalStackLayout>
     </ScrollView>
