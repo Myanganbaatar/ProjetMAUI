@@ -21,8 +21,8 @@ public class ApiService
     {
         try
         {
-            // Nouvelle URL vers RestCountries (stable et rapide)
-            var url = "https://restcountries.com/v3.1/all?fields=name,capital,population,flags";
+            // On filtre par région (Europe) pour que le fichier soit beaucoup plus léger à télécharger
+            var url = "https://restcountries.com/v3.1/region/europe?fields=name,capital,population,flags";
             var response = await _httpClient.GetAsync(url);
             
             if (response.IsSuccessStatusCode)
