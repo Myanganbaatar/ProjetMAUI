@@ -2,22 +2,132 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BarsboldApp.Views.AjoutPage"
-             Title="Ajout">
-    <VerticalStackLayout
-        Padding="30,0"
-        Spacing="25"
-        VerticalOptions="Center">
+             Title="Ajout"
+             BackgroundColor="White">
+    
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,40,30,30"
+            Spacing="20">
 
-        <Label
-            Text="Ajouter un élément"
-            FontSize="32"
-            FontAttributes="Bold"
-            HorizontalOptions="Center" />
+            <!-- Titre de la page -->
+            <Label
+                Text="Ajouter un élément"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#1A1A1A"
+                Margin="0,0,0,10" />
 
-        <Label
-            Text="Formulaire d'ajout"
-            FontSize="18"
-            HorizontalOptions="Center" />
+            <Label
+                Text="Remplissez le formulaire ci-dessous"
+                FontSize="14"
+                HorizontalOptions="Center"
+                TextColor="#6B6B6B"
+                Margin="0,0,0,20" />
 
-    </VerticalStackLayout>
+            <!-- Champ Titre -->
+            <Label
+                Text="Titre"
+                FontSize="16"
+                FontAttributes="Bold"
+                TextColor="#1A1A1A"
+                Margin="0,10,0,5" />
+            
+            <Border StrokeThickness="1"
+                    Stroke="#D0D0D0"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="White">
+                <Entry
+                    x:Name="TitreEntry"
+                    Text="{Binding Titre}"
+                    Placeholder="Entrez le titre"
+                    FontSize="16"
+                    Margin="10,5" />
+            </Border>
+
+            <!-- Champ Description -->
+            <Label
+                Text="Description"
+                FontSize="16"
+                FontAttributes="Bold"
+                TextColor="#1A1A1A"
+                Margin="0,10,0,5" />
+            
+            <Border StrokeThickness="1"
+                    Stroke="#D0D0D0"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="White">
+                <Editor
+                    x:Name="DescriptionEditor"
+                    Text="{Binding Description}"
+                    Placeholder="Entrez la description"
+                    FontSize="16"
+                    HeightRequest="120"
+                    Margin="10,5"
+                    AutoSize="TextChanges" />
+            </Border>
+
+            <!-- Section Image -->
+            <Label
+                Text="Image"
+                FontSize="16"
+                FontAttributes="Bold"
+                TextColor="#1A1A1A"
+                Margin="0,10,0,5" />
+
+            <Border StrokeThickness="1"
+                    Stroke="#D0D0D0"
+                    StrokeShape="RoundRectangle 8"
+                    BackgroundColor="#F8F8F8"
+                    HeightRequest="200"
+                    HorizontalOptions="Fill">
+                <Grid>
+                    <Image
+                        x:Name="PreviewImage"
+                        Source="{Binding ImagePath}"
+                        Aspect="AspectFit"
+                        IsVisible="{Binding ImagePath, Converter={StaticResource StringToBoolConverter}}" />
+                    
+                    <VerticalStackLayout
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        IsVisible="{Binding ImagePath, Converter={StaticResource InverseStringToBoolConverter}}">
+                        <Label
+                            Text="📷"
+                            FontSize="48"
+                            HorizontalOptions="Center" />
+                        <Label
+                            Text="Aucune image sélectionnée"
+                            FontSize="14"
+                            TextColor="#6B6B6B"
+                            HorizontalOptions="Center" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Button
+                Text="📁 Choisir une image"
+                Command="{Binding ChoisirImageCommand}"
+                BackgroundColor="#6C757D"
+                TextColor="White"
+                CornerRadius="8"
+                HeightRequest="45"
+                FontSize="16"
+                Margin="0,5,0,0" />
+
+            <!-- Bouton Ajouter -->
+            <Button
+                Text="✓ Ajouter l'élément"
+                Command="{Binding AjouterCommand}"
+                BackgroundColor="#0078D7"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"
+                FontSize="18"
+                FontAttributes="Bold"
+                Margin="0,20,0,10" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
