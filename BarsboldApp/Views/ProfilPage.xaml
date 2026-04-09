@@ -47,7 +47,7 @@
             <Grid RowDefinitions="Auto, *" x:Name="PaysSection" MinimumHeightRequest="300" Padding="0,10,0,20">
                 <Label Grid.Row="0" Text="Liste des Pays" FontSize="24" FontAttributes="Bold" Margin="15" HorizontalOptions="Center"/>
 
-                <CollectionView Grid.Row="1" ItemsSource="{Binding ListePays}" SelectionMode="Single" SelectionChanged="SurPaysSelectionne" Margin="10">
+                <CollectionView Grid.Row="1" ItemsSource="{Binding ListePays}" SelectionMode="Single" SelectionChanged="SurPaysSelectionne" Margin="10" HeightRequest="500">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame Margin="5" Padding="10" CornerRadius="10" HasShadow="True">
