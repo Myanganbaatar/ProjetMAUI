@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BarsboldApp.Views.PaysDetailPage">
+             x:Class="BarsboldApp.Views.PaysDetailPage"
+             Title="{Binding Name}">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
+            
+            <Image Source="{Binding Media.Flag}"
+                   HeightRequest="200"
+                   Aspect="AspectFit" 
+                   HorizontalOptions="Center" />
+
+            <Label Text="{Binding Name}"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" 
+                   TextColor="#512BD4"/>
+
+            <Frame BackgroundColor="#F8F9FA" Padding="20" CornerRadius="12" HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Informations détaillées" FontSize="18" FontAttributes="Bold" />
+                    
+                    <Label Text="{Binding Capital, StringFormat='🏙️ Capitale : {0}'}" FontSize="16" />
+                    <Label Text="{Binding Population, StringFormat='👥 Population : {0:N0} habitants'}" FontSize="16" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
