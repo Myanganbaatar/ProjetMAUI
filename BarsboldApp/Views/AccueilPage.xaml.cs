@@ -34,6 +34,12 @@ public partial class AccueilPage : ContentPage
         _carouselTimer.Start();
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _carouselTimer?.Start();
+    }
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
