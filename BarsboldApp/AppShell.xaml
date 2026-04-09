@@ -13,28 +13,28 @@
 
     <TabBar IsEnabled="True">
         <ShellContent
-            Title="Accueil"
+            Title="Home"
             ContentTemplate="{DataTemplate views:AccueilPage}"
             Route="AccueilPage"
             Icon="home_icone.png"
             IsEnabled="True" />
 
         <ShellContent
-            Title="Profil"
+            Title="Profile"
             ContentTemplate="{DataTemplate views:ProfilPage}"
             Route="ProfilPage"
             Icon="profil_icone.png"
             IsEnabled="True" />
 
         <ShellContent
-            Title="Ajout"
+            Title="Add"
             ContentTemplate="{DataTemplate views:AjoutPage}"
             Route="AjoutPage"
             Icon="ajout_icone.png"
             IsEnabled="True" />
 
         <ShellContent
-            Title="Paramètres"
+            Title="Settings"
             ContentTemplate="{DataTemplate views:ParametresPage}"
             Route="ParametresPage"
             Icon="settings_icone.png"

@@ -4,7 +4,7 @@
              x:Class="BarsboldApp.Views.AccueilPage"
              BackgroundColor="White"
              Shell.NavBarIsVisible="False"
-             Title="Acceuil">
+             Title="Home">
     
     <Grid RowDefinitions="*,Auto">
         
