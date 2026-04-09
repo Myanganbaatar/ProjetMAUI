@@ -8,6 +8,7 @@ namespace BarsboldApp.ViewModels;
 public class ParametresViewModel : INotifyPropertyChanged
 {
     private bool _isDarkMode;
+    private bool _isNotificationsEnabled;
 
     public bool IsDarkMode
     {
@@ -28,9 +29,27 @@ public class ParametresViewModel : INotifyPropertyChanged
         }
     }
 
+    public bool IsNotificationsEnabled
+    {
+        get => _isNotificationsEnabled;
+        set
+        {
+            if (_isNotificationsEnabled != value)
+            {
+                _isNotificationsEnabled = value;
+                OnPropertyChanged();
+                
+               
+                Preferences.Default.Set("NotifsActivees", value);
+            }
+        }
+    }
+
     public ParametresViewModel()
     {
+      
         IsDarkMode = Preferences.Default.Get("DarkModeChoisi", false);
+        IsNotificationsEnabled = Preferences.Default.Get("NotifsActivees", true);
     }
     
     public event PropertyChangedEventHandler PropertyChanged;
